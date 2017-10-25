@@ -3,8 +3,9 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const config = require('./config/config')
 const routes = require('./routes/')
-
+const mongoose = require('mongoose')
 const app = express()
+
 routes(app)
 
 app
@@ -12,5 +13,7 @@ app
     .set("view engine", "hjs")
     .use(bodyParser.json())
     .use(cors())
+
+mongoose.connect(process.env.MONGODB_URI|| 'mongodb://localhost/shortUrls')
 
 app.listen(config.port)
