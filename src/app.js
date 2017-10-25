@@ -14,6 +14,12 @@ app
     .use(bodyParser.json())
     .use(cors())
 
-mongoose.connect(process.env.MONGODB_URI|| 'mongodb://localhost/shortUrls')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/Urls', function (err, db) {
+    if (err) {
+        throw new Error('Database failed to connect!');
+    } else {
+        console.log('Successfully connected to MongoDB on port 8000.');
+    }
+})
 
 app.listen(config.port)
